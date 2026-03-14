@@ -59,8 +59,8 @@ func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
 
 	var user models.User
 	err = h.db.QueryRow(ctx,
-		`INSERT INTO "User" (id, username, email, password, "createdAt", "updatedAt")
-		 VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW())
+		`INSERT INTO "User" (id, username, email, password, "createdAt")
+		 VALUES (gen_random_uuid()::text, $1, $2, $3, NOW())
 		 RETURNING id, username, email, avatar, "createdAt"`,
 		req.Username, req.Email, string(hashed),
 	).Scan(&user.ID, &user.Username, &user.Email, &user.Avatar, &user.CreatedAt)
