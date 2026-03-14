@@ -5,7 +5,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AnimeSite — Смотреть аниме онлайн",
+  title: "ErsultanAnimeSite — Смотреть аниме онлайн",
   description: "Смотрите аниме онлайн бесплатно с русской озвучкой и субтитрами. Большой каталог, удобный плеер, списки просмотра.",
   keywords: ["аниме", "смотреть аниме", "аниме онлайн", "anime"],
 };

@@ -15,11 +15,11 @@ export async function generateMetadata({ params }: PageProps) {
   try {
     const anime = await getAnimeByUrl(id);
     return {
-      title: `${anime.title} — AnimeSite`,
+      title: `${anime.title} — ErsultanAnimeSite`,
       description: anime.description?.slice(0, 160),
     };
   } catch {
-    return { title: "Аниме — AnimeSite" };
+    return { title: "Аниме — ErsultanAnimeSite" };
   }
 }
 

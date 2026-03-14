@@ -8,7 +8,7 @@ import { AnimeGridSkeleton } from "@/components/AnimeCardSkeleton";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Каталог аниме — AnimeSite",
+  title: "Каталог аниме — ErsultanAnimeSite",
   description: "Полный каталог аниме с фильтрами по жанру, типу, статусу и году.",
 };
 

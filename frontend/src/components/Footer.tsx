@@ -7,8 +7,8 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
             <Link href="/" className="text-lg font-bold">
-              <span className="text-accent">Anime</span>
-              <span className="text-text-primary">Site</span>
+              <span className="text-accent">Ersultan</span>
+              <span className="text-text-primary">AnimeSite</span>
             </Link>
             <p className="mt-2 text-sm text-text-muted">
               Смотри аниме онлайн бесплатно с русской озвучкой и субтитрами.
@@ -39,7 +39,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-border pt-4 text-center text-xs text-text-muted">
-          &copy; {new Date().getFullYear()} AnimeSite. Все права защищены.
+          &copy; {new Date().getFullYear()} ErsultanAnimeSite. Все права защищены.
         </div>
       </div>
     </footer>
