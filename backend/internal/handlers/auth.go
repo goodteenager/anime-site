@@ -43,7 +43,7 @@ func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
 		req.Email, req.Username,
 	).Scan(&count)
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]string{"message": "Ошибка сервера"})
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"message": "DB check: " + err.Error()})
 		return
 	}
 	if count > 0 {
@@ -53,7 +53,7 @@ func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
 
 	hashed, err := bcrypt.GenerateFromPassword([]byte(req.Password), 10)
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]string{"message": "Ошибка сервера"})
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"message": "Hash: " + err.Error()})
 		return
 	}
 
@@ -65,7 +65,7 @@ func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
 		req.Username, req.Email, string(hashed),
 	).Scan(&user.ID, &user.Username, &user.Email, &user.Avatar, &user.CreatedAt)
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]string{"message": "Ошибка создания пользователя"})
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"message": "Insert: " + err.Error()})
 		return
 	}
 
