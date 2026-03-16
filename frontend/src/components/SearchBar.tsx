@@ -65,15 +65,15 @@ export function SearchBar({ onClose }: SearchBarProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Поиск аниме (мин. 3 символа)..."
-          className="w-full rounded-lg border border-border bg-bg-card py-2.5 pl-10 pr-10 text-sm text-text-primary placeholder-text-muted outline-none transition-colors focus:border-accent"
+          className="w-full rounded-full border border-border bg-bg-card py-2.5 pl-10 pr-10 text-sm text-text-primary placeholder-text-muted outline-none transition-colors focus:border-accent"
         />
         {loading && (
-          <Loader2 size={18} className="absolute right-3 top-1/2 -translate-y-1/2 animate-spin text-text-muted" />
+          <Loader2 size={18} className="absolute right-3 top-1/2 -translate-y-1/2 animate-spin text-accent" />
         )}
         {!loading && query && (
           <button
             onClick={() => { setQuery(""); setResults([]); setShowResults(false); }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-accent"
           >
             <X size={18} />
           </button>
@@ -81,7 +81,7 @@ export function SearchBar({ onClose }: SearchBarProps) {
       </div>
 
       {showResults && results.length > 0 && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[60vh] overflow-y-auto rounded-xl border border-border bg-bg-secondary shadow-2xl">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[60vh] overflow-y-auto rounded-2xl border border-border bg-bg-card shadow-xl">
           {results.map((anime) => (
             <Link
               key={anime.anime_id}
@@ -89,7 +89,7 @@ export function SearchBar({ onClose }: SearchBarProps) {
               onClick={handleSelect}
               className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-bg-hover"
             >
-              <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded">
+              <div className="relative h-14 w-10 shrink-0 overflow-hidden rounded-xl">
                 <Image
                   src={fixUrl(anime.poster?.small || anime.poster?.medium)}
                   alt={anime.title}
@@ -99,7 +99,7 @@ export function SearchBar({ onClose }: SearchBarProps) {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <div className="truncate text-sm font-medium text-text-primary">
+                <div className="truncate text-sm font-semibold text-text-primary">
                   {anime.title}
                 </div>
                 <div className="text-xs text-text-muted">
@@ -112,7 +112,7 @@ export function SearchBar({ onClose }: SearchBarProps) {
           <Link
             href={`/catalog?q=${encodeURIComponent(query)}`}
             onClick={handleSelect}
-            className="block border-t border-border px-4 py-3 text-center text-sm text-accent transition-colors hover:bg-bg-hover"
+            className="block border-t border-border px-4 py-3 text-center text-sm font-semibold text-accent transition-colors hover:bg-bg-hover"
           >
             Все результаты &rarr;
           </Link>
@@ -120,7 +120,7 @@ export function SearchBar({ onClose }: SearchBarProps) {
       )}
 
       {showResults && results.length === 0 && !loading && query.length >= 3 && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-xl border border-border bg-bg-secondary p-6 text-center shadow-2xl">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-2xl border border-border bg-bg-card p-6 text-center shadow-xl">
           <p className="text-sm text-text-muted">Ничего не найдено</p>
         </div>
       )}

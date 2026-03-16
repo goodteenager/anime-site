@@ -25,7 +25,7 @@ function AnimeSection({
         </h2>
         <Link
           href={href}
-          className="flex items-center gap-1 text-sm text-text-muted transition-colors hover:text-accent-light"
+          className="flex items-center gap-1 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
         >
           Все
           <ArrowRight size={14} />
@@ -45,7 +45,7 @@ function ScheduleSection({ items }: { items: ScheduleItem[] }) {
   return (
     <section>
       <div className="mb-5 flex items-center gap-2">
-        <CalendarDays size={22} className="text-purple-400" />
+        <CalendarDays size={22} className="text-accent" />
         <h2 className="text-xl font-bold text-text-primary">Расписание</h2>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -53,18 +53,18 @@ function ScheduleSection({ items }: { items: ScheduleItem[] }) {
           <Link
             key={item.anime_id}
             href={`/anime/${item.anime_url}`}
-            className="flex items-center gap-3 rounded-xl bg-bg-card p-3 transition-colors hover:bg-bg-hover"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-bg-card p-3 transition-colors hover:bg-bg-hover"
           >
-            <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-lg">
+            <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-xl">
               <Image src={fixUrl(item.poster?.medium)} alt={item.title} fill className="object-cover" sizes="48px" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="truncate text-sm font-medium text-text-primary">{item.title}</div>
+              <div className="truncate text-sm font-semibold text-text-primary">{item.title}</div>
               <div className="text-xs text-text-muted">
                 Эп. {item.episodes.aired} / {item.episodes.count || "?"}
               </div>
               {item.episodes.next_date > 0 && (
-                <div className="text-xs text-accent-light">
+                <div className="text-xs font-semibold text-accent">
                   След: {new Date(item.episodes.next_date * 1000).toLocaleDateString("ru-RU", { day: "numeric", month: "short" })}
                 </div>
               )}
@@ -100,26 +100,36 @@ export default async function HomePage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       {/* Hero */}
-      <section className="mb-12 rounded-2xl bg-gradient-to-br from-accent/20 via-bg-secondary to-bg-primary p-8 md:p-12">
-        <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-text-primary md:text-5xl">
-          Смотри <span className="text-accent">аниме</span> онлайн
-        </h1>
-        <p className="mb-6 max-w-xl text-text-secondary">
-          Большой каталог аниме с русской озвучкой. Отслеживай прогресс, составляй списки и делись впечатлениями.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/catalog"
-            className="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
-          >
-            Перейти в каталог
-          </Link>
-          <Link
-            href="/catalog?status=ongoing"
-            className="rounded-lg border border-border bg-bg-card px-6 py-3 text-sm font-semibold text-text-secondary transition-colors hover:bg-bg-hover"
-          >
-            Онгоинги
-          </Link>
+      <section className="mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-[#fce8f5] via-[#f5d8f0] to-[#e8f0fc] p-8 md:p-12">
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <div>
+            <h1 className="mb-3 text-3xl font-bold leading-tight text-text-primary md:text-5xl">
+              Романтика,
+              <br />
+              магия и <em className="not-italic text-accent">мечты</em>
+            </h1>
+            <p className="mb-6 max-w-xl text-[13px] leading-relaxed text-text-secondary">
+              Погрузись в мир трогательных историй о любви,
+              дружбе и волшебных приключениях. Большой каталог аниме с русской озвучкой.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/catalog" className="pastel-btn">
+                Смотреть аниме 🌸
+              </Link>
+              <Link href="/catalog?status=ongoing" className="pastel-btn-outline">
+                Онгоинги
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-3 max-md:hidden">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#fce8f5] text-4xl">🌸</div>
+            <div className="flex flex-col gap-3">
+              <div className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#e8f0fc] text-2xl">✨</div>
+              <div className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#fdf5e8] text-2xl">🦋</div>
+            </div>
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#e8fcf0] text-4xl">🌙</div>
+          </div>
         </div>
       </section>
 
@@ -127,7 +137,7 @@ export default async function HomePage() {
         {feed.top_carousel?.items && (
           <AnimeSection
             title={`Топ сезона ${feed.top_carousel.year}`}
-            icon={<Sparkles size={22} className="text-yellow-400" />}
+            icon={<Sparkles size={22} className="text-accent-light" />}
             animes={feed.top_carousel.items}
             href="/catalog?sort=top"
           />
@@ -135,14 +145,14 @@ export default async function HomePage() {
 
         <AnimeSection
           title="Новинки"
-          icon={<Clock size={22} className="text-green-400" />}
+          icon={<Clock size={22} className="text-accent" />}
           animes={feed.new}
           href="/catalog?sort=year"
         />
 
         <AnimeSection
           title="Рекомендации"
-          icon={<TrendingUp size={22} className="text-orange-400" />}
+          icon={<TrendingUp size={22} className="text-accent-light" />}
           animes={feed.recommends}
           href="/catalog?sort=rating"
         />
@@ -152,7 +162,7 @@ export default async function HomePage() {
         {feed.announcements && feed.announcements.length > 0 && (
           <AnimeSection
             title="Анонсы"
-            icon={<CalendarDays size={22} className="text-blue-400" />}
+            icon={<CalendarDays size={22} className="text-accent" />}
             animes={feed.announcements}
             href="/catalog?status=announcement"
           />

@@ -48,10 +48,10 @@ function FilterSelect({ label, options, value, onChange }: FilterSelectProps) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors ${
+        className={`flex items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-semibold transition-colors ${
           value
-            ? "border-accent bg-accent/10 text-accent-light"
-            : "border-border bg-bg-card text-text-secondary hover:border-text-muted"
+            ? "border-accent bg-accent/10 text-accent"
+            : "border-border bg-bg-card text-text-secondary hover:border-accent-light"
         }`}
       >
         <span>{value ? options.find((o) => o.value === value)?.label : label}</span>
@@ -61,7 +61,7 @@ function FilterSelect({ label, options, value, onChange }: FilterSelectProps) {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 top-full z-50 mt-1 max-h-60 min-w-[160px] overflow-y-auto rounded-lg border border-border bg-bg-secondary py-1 shadow-xl">
+          <div className="absolute left-0 top-full z-50 mt-1 max-h-60 min-w-[160px] overflow-y-auto rounded-2xl border border-border bg-bg-card py-1 shadow-xl">
             {value && (
               <button
                 onClick={() => { onChange(""); setOpen(false); }}
@@ -76,7 +76,7 @@ function FilterSelect({ label, options, value, onChange }: FilterSelectProps) {
                 key={opt.value}
                 onClick={() => { onChange(opt.value); setOpen(false); }}
                 className={`w-full px-3 py-2 text-left text-sm transition-colors hover:bg-bg-hover ${
-                  value === opt.value ? "text-accent-light" : "text-text-primary"
+                  value === opt.value ? "font-semibold text-accent" : "text-text-primary"
                 }`}
               >
                 {opt.label}
@@ -121,7 +121,7 @@ export function Filters() {
       {hasFilters && (
         <button
           onClick={() => router.push("/catalog")}
-          className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-text-muted transition-colors hover:text-text-primary"
+          className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-text-muted transition-colors hover:text-accent"
         >
           <X size={14} />
           Сбросить все

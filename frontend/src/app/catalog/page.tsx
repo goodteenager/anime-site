@@ -8,7 +8,7 @@ import { AnimeGridSkeleton } from "@/components/AnimeCardSkeleton";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Каталог аниме — ErsultanAnimeSite",
+  title: "Каталог аниме — HanaAnime",
   description: "Полный каталог аниме с фильтрами по жанру, типу, статусу и году.",
 };
 
@@ -61,7 +61,7 @@ async function CatalogContent({ searchParams }: { searchParams: PageProps["searc
   if (!animes || !Array.isArray(animes) || animes.length === 0) {
     return (
       <div className="py-12 text-center">
-        <p className="text-lg font-medium text-text-primary">Ничего не найдено</p>
+        <p className="text-lg font-bold text-text-primary">Ничего не найдено</p>
         <p className="mt-1 text-sm text-text-muted">Попробуйте изменить параметры поиска</p>
       </div>
     );
@@ -85,7 +85,7 @@ export default async function CatalogPage({ searchParams }: PageProps) {
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="mb-6">
         <h1 className="mb-1 text-2xl font-bold text-text-primary">
-          {params.q ? `Результаты: «${params.q}»` : "Каталог аниме"}
+          {params.q ? `Результаты: «${params.q}»` : "Каталог аниме 🌸"}
         </h1>
         <p className="text-sm text-text-muted">Фильтруй и находи аниме по вкусу</p>
       </div>

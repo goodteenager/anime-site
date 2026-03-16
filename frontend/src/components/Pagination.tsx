@@ -24,20 +24,20 @@ export function Pagination({ currentPage, hasMore, basePath = "/catalog" }: Pagi
       <button
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="flex items-center gap-1 rounded-lg border border-border px-4 py-2 text-sm text-text-secondary transition-colors hover:bg-bg-hover disabled:cursor-not-allowed disabled:opacity-30"
+        className="pastel-btn-outline disabled:cursor-not-allowed disabled:opacity-30"
       >
         <ChevronLeft size={16} />
         Назад
       </button>
 
-      <span className="rounded-lg bg-accent/20 px-4 py-2 text-sm font-medium text-accent-light">
+      <span className="rounded-full bg-accent/15 px-5 py-2.5 text-sm font-bold text-accent">
         {currentPage}
       </span>
 
       <button
         onClick={() => goToPage(currentPage + 1)}
         disabled={!hasMore}
-        className="flex items-center gap-1 rounded-lg border border-border px-4 py-2 text-sm text-text-secondary transition-colors hover:bg-bg-hover disabled:cursor-not-allowed disabled:opacity-30"
+        className="pastel-btn-outline disabled:cursor-not-allowed disabled:opacity-30"
       >
         Далее
         <ChevronRight size={16} />

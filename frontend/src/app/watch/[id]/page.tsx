@@ -71,8 +71,8 @@ export default function WatchPage() {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
         <div className="text-center">
-          <h1 className="mb-2 text-2xl font-bold">{error || "Аниме не найдено"}</h1>
-          <Link href="/catalog" className="text-accent hover:underline">В каталог</Link>
+          <h1 className="mb-2 text-2xl font-bold text-text-primary">{error || "Аниме не найдено"}</h1>
+          <Link href="/catalog" className="font-semibold text-accent hover:underline">В каталог</Link>
         </div>
       </div>
     );
@@ -80,9 +80,8 @@ export default function WatchPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6">
-      {/* Breadcrumb */}
       <div className="mb-4 flex items-center gap-2 text-sm text-text-muted">
-        <Link href={`/anime/${anime.anime_url}`} className="transition-colors hover:text-accent-light">
+        <Link href={`/anime/${anime.anime_url}`} className="font-semibold transition-colors hover:text-accent">
           {anime.title}
         </Link>
         <span>/</span>
@@ -92,7 +91,6 @@ export default function WatchPage() {
       </div>
 
       <div className="flex flex-col gap-6 lg:flex-row">
-        {/* Player Column */}
         <div className="flex-1">
           {selectedVideo ? (
             <PlayerEmbed
@@ -100,20 +98,19 @@ export default function WatchPage() {
               title={`${anime.title} — Эпизод ${selectedVideo.number}`}
             />
           ) : (
-            <div className="flex aspect-video items-center justify-center rounded-xl bg-bg-card">
+            <div className="flex aspect-video items-center justify-center rounded-2xl border border-border bg-bg-card">
               <p className="text-text-muted">
                 {videos.length === 0 ? "Видео пока недоступны" : "Выберите эпизод"}
               </p>
             </div>
           )}
 
-          {/* Navigation */}
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               {prevVideo && (
                 <button
                   onClick={() => setSelectedVideo(prevVideo)}
-                  className="flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-sm text-text-secondary transition-colors hover:bg-bg-hover"
+                  className="pastel-btn-outline"
                 >
                   <ChevronLeft size={16} />
                   Эп. {prevVideo.number}
@@ -122,7 +119,7 @@ export default function WatchPage() {
               {nextVideo && (
                 <button
                   onClick={() => setSelectedVideo(nextVideo)}
-                  className="flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-sm text-text-secondary transition-colors hover:bg-bg-hover"
+                  className="pastel-btn-outline"
                 >
                   Эп. {nextVideo.number}
                   <ChevronRight size={16} />
@@ -135,10 +132,9 @@ export default function WatchPage() {
             )}
           </div>
 
-          {/* Dubbing selector */}
           {dubbingNames.length > 1 && (
             <div className="mt-4">
-              <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-text-muted">
+              <h3 className="mb-2 flex items-center gap-2 text-sm font-bold text-text-muted">
                 <Volume2 size={14} />
                 Озвучка
               </h3>
@@ -151,10 +147,10 @@ export default function WatchPage() {
                       const eps = dubbingMap.get(name) || [];
                       setSelectedVideo(eps[0] || null);
                     }}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                    className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors ${
                       selectedDubbing === name
-                        ? "bg-accent text-white"
-                        : "border border-border bg-bg-card text-text-secondary hover:bg-bg-hover"
+                        ? "bg-gradient-to-r from-accent-light to-accent text-white"
+                        : "border border-border bg-bg-card text-text-secondary hover:border-accent-light hover:bg-bg-hover"
                     }`}
                   >
                     {name} ({dubbingMap.get(name)?.length || 0})
@@ -165,7 +161,6 @@ export default function WatchPage() {
           )}
         </div>
 
-        {/* Episode List */}
         <div className="w-full shrink-0 lg:w-72">
           {currentEpisodes.length > 0 && (
             <EpisodeList

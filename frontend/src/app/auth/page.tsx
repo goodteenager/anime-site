@@ -42,7 +42,8 @@ export default function AuthPage() {
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <div className="rounded-2xl border border-border bg-bg-card p-8">
+        <div className="rounded-3xl border border-border bg-bg-card p-8">
+          <div className="mb-4 text-center text-4xl">🌸</div>
           <h1 className="mb-6 text-center text-2xl font-bold text-text-primary">
             {isLogin ? "Вход" : "Регистрация"}
           </h1>
@@ -50,32 +51,32 @@ export default function AuthPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
               <div>
-                <label className="mb-1 block text-sm text-text-muted">Имя пользователя</label>
+                <label className="mb-1 block text-sm font-semibold text-text-muted">Имя пользователя</label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required={!isLogin}
-                  className="w-full rounded-lg border border-border bg-bg-primary px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+                  className="w-full rounded-xl border border-border bg-bg-primary px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
                   placeholder="username"
                 />
               </div>
             )}
 
             <div>
-              <label className="mb-1 block text-sm text-text-muted">Email</label>
+              <label className="mb-1 block text-sm font-semibold text-text-muted">Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-bg-primary px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+                className="w-full rounded-xl border border-border bg-bg-primary px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
                 placeholder="you@example.com"
               />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm text-text-muted">Пароль</label>
+              <label className="mb-1 block text-sm font-semibold text-text-muted">Пароль</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -83,7 +84,7 @@ export default function AuthPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
-                  className="w-full rounded-lg border border-border bg-bg-primary px-4 py-2.5 pr-10 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+                  className="w-full rounded-xl border border-border bg-bg-primary px-4 py-2.5 pr-10 text-sm text-text-primary outline-none transition-colors focus:border-accent"
                   placeholder="Минимум 6 символов"
                 />
                 <button
@@ -97,7 +98,7 @@ export default function AuthPage() {
             </div>
 
             {error && (
-              <div className="rounded-lg bg-red-500/10 px-4 py-2 text-sm text-red-400">
+              <div className="rounded-xl bg-accent-light/15 px-4 py-2 text-sm text-accent">
                 {error}
               </div>
             )}
@@ -105,7 +106,7 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover disabled:opacity-50"
+              className="pastel-btn w-full justify-center disabled:opacity-50"
             >
               {isLogin ? <LogIn size={16} /> : <UserPlus size={16} />}
               {loading ? "Загрузка..." : isLogin ? "Войти" : "Зарегистрироваться"}
@@ -116,7 +117,7 @@ export default function AuthPage() {
             {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}{" "}
             <button
               onClick={() => { setIsLogin(!isLogin); setError(""); }}
-              className="text-accent-light hover:underline"
+              className="font-bold text-accent hover:underline"
             >
               {isLogin ? "Зарегистрироваться" : "Войти"}
             </button>

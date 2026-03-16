@@ -9,7 +9,7 @@ export function PlayerEmbed({ src, title }: PlayerEmbedProps) {
   const embedUrl = src.startsWith("//") ? `https:${src}` : src;
 
   return (
-    <div className="relative w-full overflow-hidden rounded-xl bg-black" style={{ aspectRatio: "16/9" }}>
+    <div className="relative w-full overflow-hidden rounded-2xl border border-border bg-[#3a2840]" style={{ aspectRatio: "16/9" }}>
       <iframe
         src={embedUrl}
         title={title || "Anime Player"}

@@ -78,10 +78,10 @@ export function WatchlistButton({ animeId, title, image, totalEpisodes }: Watchl
         <button
           onClick={handleButtonClick}
           disabled={loading}
-          className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors disabled:opacity-50 ${
+          className={`flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold transition-colors disabled:opacity-50 ${
             item
-              ? "bg-accent text-white hover:bg-accent-hover"
-              : "border border-border bg-bg-card text-text-secondary hover:bg-bg-hover"
+              ? "bg-gradient-to-r from-accent-light to-accent text-white"
+              : "border border-border bg-bg-card text-text-secondary hover:border-accent-light hover:bg-bg-hover"
           }`}
         >
           {item ? <Check size={16} /> : <Bookmark size={16} />}
@@ -92,13 +92,13 @@ export function WatchlistButton({ animeId, title, image, totalEpisodes }: Watchl
         {open && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-            <div className="absolute left-0 top-full z-50 mt-1 min-w-[160px] overflow-hidden rounded-lg border border-border bg-bg-secondary py-1 shadow-xl">
+            <div className="absolute left-0 top-full z-50 mt-1 min-w-[160px] overflow-hidden rounded-2xl border border-border bg-bg-card py-1 shadow-xl">
               {(Object.entries(STATUS_LABELS) as [WatchStatus, string][]).map(([status, label]) => (
                 <button
                   key={status}
                   onClick={() => handleSelect(status)}
                   className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-bg-hover ${
-                    item?.status === status ? "text-accent-light" : "text-text-primary"
+                    item?.status === status ? "font-semibold text-accent" : "text-text-primary"
                   }`}
                 >
                   {item?.status === status && <Check size={14} />}
@@ -111,7 +111,7 @@ export function WatchlistButton({ animeId, title, image, totalEpisodes }: Watchl
                   <div className="my-1 border-t border-border" />
                   <button
                     onClick={() => { handleSelect(item.status); }}
-                    className="w-full px-3 py-2 text-left text-sm text-red-400 transition-colors hover:bg-bg-hover"
+                    className="w-full px-3 py-2 text-left text-sm text-accent transition-colors hover:bg-bg-hover"
                   >
                     Удалить из списка
                   </button>
@@ -125,10 +125,10 @@ export function WatchlistButton({ animeId, title, image, totalEpisodes }: Watchl
       <button
         onClick={handleFav}
         disabled={loading}
-        className={`flex items-center justify-center rounded-lg px-3 py-2.5 transition-colors disabled:opacity-50 ${
+        className={`flex items-center justify-center rounded-full px-3 py-2.5 transition-colors disabled:opacity-50 ${
           fav
-            ? "bg-red-500/20 text-red-400"
-            : "border border-border bg-bg-card text-text-muted hover:bg-bg-hover hover:text-red-400"
+            ? "bg-accent-light/20 text-accent"
+            : "border border-border bg-bg-card text-text-muted hover:border-accent-light hover:bg-bg-hover hover:text-accent"
         }`}
         title={fav ? "Убрать из избранного" : "В избранное"}
       >

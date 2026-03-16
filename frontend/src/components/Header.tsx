@@ -13,22 +13,22 @@ export function Header() {
   const logout = useStore((s) => s.logout);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg-secondary/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg-secondary backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-            <span className="text-accent">Ersultan</span>
-            <span className="text-text-primary">AnimeSite</span>
+          <Link href="/" className="text-xl font-bold">
+            <span className="text-accent">hana</span>
+            <span className="text-accent-light">anime</span>
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
-            <Link href="/catalog" className="text-sm text-text-secondary transition-colors hover:text-text-primary">
+            <Link href="/catalog" className="text-[13px] font-semibold text-text-muted transition-colors hover:text-accent">
               Каталог
             </Link>
-            <Link href="/catalog?status=ongoing" className="text-sm text-text-secondary transition-colors hover:text-text-primary">
+            <Link href="/catalog?status=ongoing" className="text-[13px] font-semibold text-text-muted transition-colors hover:text-accent">
               Онгоинги
             </Link>
-            <Link href="/catalog?sort=rating" className="text-sm text-text-secondary transition-colors hover:text-text-primary">
+            <Link href="/catalog?sort=rating" className="text-[13px] font-semibold text-text-muted transition-colors hover:text-accent">
               Популярное
             </Link>
           </nav>
@@ -37,7 +37,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSearchOpen(!searchOpen)}
-            className="rounded-lg p-2 text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+            className="rounded-full p-2 text-text-muted transition-colors hover:bg-bg-hover hover:text-accent"
             aria-label="Поиск"
           >
             <Search size={20} />
@@ -47,20 +47,20 @@ export function Header() {
             <div className="hidden items-center gap-3 md:flex">
               <Link
                 href="/profile?tab=favorites"
-                className="rounded-lg p-2 text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary"
+                className="rounded-full p-2 text-text-muted transition-colors hover:bg-bg-hover hover:text-accent"
               >
                 <Heart size={20} />
               </Link>
               <Link
                 href="/profile"
-                className="flex items-center gap-2 rounded-lg bg-bg-card px-3 py-2 text-sm transition-colors hover:bg-bg-hover"
+                className="flex items-center gap-2 rounded-full bg-bg-hover px-3 py-2 text-sm font-semibold transition-colors hover:bg-border"
               >
                 <User size={16} />
                 <span>{user.username}</span>
               </Link>
               <button
                 onClick={logout}
-                className="rounded-lg p-2 text-text-secondary transition-colors hover:bg-bg-hover hover:text-red-400"
+                className="rounded-full p-2 text-text-muted transition-colors hover:bg-bg-hover hover:text-accent"
                 title="Выйти"
               >
                 <LogOut size={18} />
@@ -69,7 +69,7 @@ export function Header() {
           ) : (
             <Link
               href="/auth"
-              className="hidden items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover md:flex"
+              className="pastel-btn hidden md:inline-flex"
             >
               <LogIn size={16} />
               <span>Войти</span>
@@ -78,7 +78,7 @@ export function Header() {
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-lg p-2 text-text-secondary transition-colors hover:bg-bg-hover md:hidden"
+            className="rounded-full p-2 text-text-muted transition-colors hover:bg-bg-hover md:hidden"
             aria-label="Меню"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -87,7 +87,7 @@ export function Header() {
       </div>
 
       {searchOpen && (
-        <div className="border-t border-border bg-bg-secondary px-4 py-3">
+        <div className="border-t border-border bg-bg-card px-4 py-3">
           <div className="mx-auto max-w-2xl">
             <SearchBar onClose={() => setSearchOpen(false)} />
           </div>
@@ -95,30 +95,30 @@ export function Header() {
       )}
 
       {menuOpen && (
-        <div className="border-t border-border bg-bg-secondary p-4 md:hidden">
+        <div className="border-t border-border bg-bg-card p-4 md:hidden">
           <nav className="flex flex-col gap-3">
-            <Link href="/catalog" className="rounded-lg px-3 py-2 text-text-secondary hover:bg-bg-hover" onClick={() => setMenuOpen(false)}>
+            <Link href="/catalog" className="rounded-xl px-3 py-2 text-[13px] font-semibold text-text-muted hover:bg-bg-hover hover:text-accent" onClick={() => setMenuOpen(false)}>
               Каталог
             </Link>
-            <Link href="/catalog?status=ongoing" className="rounded-lg px-3 py-2 text-text-secondary hover:bg-bg-hover" onClick={() => setMenuOpen(false)}>
+            <Link href="/catalog?status=ongoing" className="rounded-xl px-3 py-2 text-[13px] font-semibold text-text-muted hover:bg-bg-hover hover:text-accent" onClick={() => setMenuOpen(false)}>
               Онгоинги
             </Link>
-            <Link href="/catalog?sort=rating" className="rounded-lg px-3 py-2 text-text-secondary hover:bg-bg-hover" onClick={() => setMenuOpen(false)}>
+            <Link href="/catalog?sort=rating" className="rounded-xl px-3 py-2 text-[13px] font-semibold text-text-muted hover:bg-bg-hover hover:text-accent" onClick={() => setMenuOpen(false)}>
               Популярное
             </Link>
             {!user && (
-              <Link href="/auth" className="rounded-lg bg-accent px-3 py-2 text-center text-white" onClick={() => setMenuOpen(false)}>
+              <Link href="/auth" className="pastel-btn justify-center" onClick={() => setMenuOpen(false)}>
                 Войти
               </Link>
             )}
             {user && (
               <>
-                <Link href="/profile" className="rounded-lg px-3 py-2 text-text-secondary hover:bg-bg-hover" onClick={() => setMenuOpen(false)}>
+                <Link href="/profile" className="rounded-xl px-3 py-2 text-[13px] font-semibold text-text-muted hover:bg-bg-hover" onClick={() => setMenuOpen(false)}>
                   Профиль
                 </Link>
                 <button
                   onClick={() => { logout(); setMenuOpen(false); }}
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 text-red-400 hover:bg-bg-hover"
+                  className="flex items-center gap-2 rounded-xl px-3 py-2 text-[13px] font-semibold text-accent hover:bg-bg-hover"
                 >
                   <LogOut size={16} />
                   Выйти
