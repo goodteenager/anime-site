@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Star, Calendar, Film, Clock, Play, Eye, Users } from "lucide-react";
 import { getAnimeByUrl, getRatingColor, getSeasonName, formatViews, fixUrl, type AnimeDetail } from "@/lib/yummyanime";
 import { WatchlistButton } from "@/components/WatchlistButton";
+import { Screenshots } from "@/components/Screenshots";
 
 export const dynamic = "force-dynamic";
 
@@ -88,13 +89,8 @@ export default async function AnimePage({ params }: PageProps) {
               <div className="flex items-center gap-2 rounded-full border border-border bg-bg-card px-4 py-2">
                 <Star size={16} className="fill-accent-light text-accent-light" />
                 <span className={`text-lg font-bold ${getRatingColor(score)}`}>{score.toFixed(2)}</span>
-                <span className="text-xs text-text-muted">({anime.rating.counters})</span>
               </div>
             )}
-            <div className="flex items-center gap-1 rounded-full border border-border bg-bg-card px-3 py-2 text-sm text-text-muted">
-              <Eye size={14} />
-              {formatViews(anime.views)}
-            </div>
             <span className={`rounded-full px-3 py-1.5 text-sm font-bold ${
               anime.anime_status.alias === "ongoing" ? "bg-accent-light/20 text-accent" :
               anime.anime_status.alias === "announcement" ? "bg-[#e8f0fc] text-[#6a7ab8]" :
@@ -117,7 +113,6 @@ export default async function AnimePage({ params }: PageProps) {
               value={anime.episodes ? `${anime.episodes.aired} / ${anime.episodes.count || "?"}` : "—"}
             />
             <InfoBlock icon={<Calendar size={16} />} label="Год" value={`${anime.year}`} />
-            <InfoBlock icon={<Clock size={16} />} label="Длительность" value={anime.duration ? `${anime.duration} мин.` : "—"} />
           </div>
 
           {anime.season > 0 && (
@@ -169,32 +164,20 @@ export default async function AnimePage({ params }: PageProps) {
           {(anime.rating.shikimori_rating ?? anime.rating.myanimelist_rating ?? anime.rating.kp_rating) ? (
             <div className="mb-6 flex flex-wrap gap-3">
               {(anime.rating.shikimori_rating ?? 0) > 0 && (
-                <span className="rounded-full border border-border bg-bg-card px-3 py-1.5 text-xs text-text-muted">Shikimori: {anime.rating.shikimori_rating}</span>
+                <span className="rounded-full border border-border bg-bg-card px-3 py-1.5 text-xs text-text-muted">Shikimori: {anime.rating.shikimori_rating?.toFixed(2)}</span>
               )}
               {(anime.rating.myanimelist_rating ?? 0) > 0 && (
-                <span className="rounded-full border border-border bg-bg-card px-3 py-1.5 text-xs text-text-muted">MAL: {anime.rating.myanimelist_rating}</span>
+                <span className="rounded-full border border-border bg-bg-card px-3 py-1.5 text-xs text-text-muted">MAL: {anime.rating.myanimelist_rating?.toFixed(2)}</span>
               )}
               {(anime.rating.kp_rating ?? 0) > 0 && (
-                <span className="rounded-full border border-border bg-bg-card px-3 py-1.5 text-xs text-text-muted">КиноПоиск: {anime.rating.kp_rating}</span>
+                <span className="rounded-full border border-border bg-bg-card px-3 py-1.5 text-xs text-text-muted">КиноПоиск: {anime.rating.kp_rating?.toFixed(2)}</span>
               )}
             </div>
           ) : null}
         </div>
       </div>
 
-      {anime.random_screenshots && anime.random_screenshots.length > 0 && (
-        <section className="mt-12">
-          <h2 className="mb-4 text-xl font-bold text-text-primary">Скриншоты</h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-            {anime.random_screenshots.slice(0, 8).map((ss) => (
-              <div key={ss.id} className="overflow-hidden rounded-2xl border border-border">
-                <Image src={fixUrl(ss.sizes?.full || ss.sizes?.small)} alt="Скриншот" width={320} height={180} className="h-full w-full object-cover transition-transform hover:scale-105" />
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
+      <Screenshots screenshotsData={anime.random_screenshots || []} />
       <div className="mt-8 text-center">
         <Link
           href={`/watch/${anime.anime_id}`}

@@ -10,7 +10,10 @@ interface EpisodeListProps {
 }
 
 export function EpisodeList({ videos, currentVideoId, onSelect }: EpisodeListProps) {
-  const sorted = [...videos].sort((a, b) => parseFloat(a.number) - parseFloat(b.number));
+  // Сортируем и фильтруем дубли по номеру эпизода
+  const sorted = [...videos]
+    .sort((a, b) => parseFloat(a.number) - parseFloat(b.number))
+    .filter((v, i, arr) => arr.findIndex(x => x.number === v.number) === i);
 
   return (
     <div className="space-y-2">
@@ -22,7 +25,7 @@ export function EpisodeList({ videos, currentVideoId, onSelect }: EpisodeListPro
           const isCurrent = currentVideoId === video.video_id;
           return (
             <button
-              key={video.video_id}
+              key={`${video.video_id}-${video.number}`} // уникальный ключ
               onClick={() => onSelect(video)}
               className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
                 isCurrent
